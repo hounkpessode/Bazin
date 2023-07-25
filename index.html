@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ma Boutique Électronique</title>
+  <style>
+    /* Styles généraux */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Styles de l'en-tête */
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Styles du contenu principal */
+    main {
+      padding: 20px;
+    }
+
+    /* Styles des produits */
+    .product {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .product img {
+      width: 100px;
+      margin-right: 10px;
+    }
+
+    .product-info {
+      flex: 1;
+    }
+
+    .product-title {
+      margin: 0;
+    }
+
+    .product-price {
+      font-weight: bold;
+    }
+
+    .add-to-cart {
+      margin-top: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .add-to-cart:hover {
+      background-color: #45a049;
+    }
+
+    /* Styles pour le formulaire de commande */
+    #order-form {
+      display: flex;
+      flex-direction: column;
+      max-width: 300px;
+      margin: 20px auto;
+    }
+
+    #order-form input {
+      margin-bottom: 10px;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    #order-form button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #order-form button:hover {
+      background-color: #45a049;
+    }
+
+    /* Media queries pour une mise en page adaptative */
+    @media screen and (max-width: 767px) {
+      .product {
+        flex-direction: column;
+      }
+      .product img {
+        margin: 0 auto 10px;
+      }
+      #order-form {
+        max-width: 100%;
+      }
+    }
+     /* Styles spécifiques aux projets */
+     .image {
+      margin-bottom: 5px;
+    }
+
+
+    .image-media {
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ma Boutique De Bazin </h1>
+  </header>
+  <main>
+    <div class="product">
+      <img src="images/ima (7).jpeg" alt="Composant 1">
+      <div class="product-info">
+        <h2 class="product-title">Bazin riche</h2>
+        <p class="product-price"> 45000 FCFA</p>
+        <p> Bazin disponible pour vous  </p>
+        <button class="add-to-cart" onclick="addToCart('Composant 1',45000 )">Ajouter au panier</button>
+      </div>
+    </div>
+    <div class="product">
+      <img src="images/ima (21).jpeg" alt="Composant 2">
+      <div class="product-info">
+        <h2 class="product-title">Bazin semi riche </h2>
+        <p class="product-price">20000 FCFA</p>
+        <p>Bazin disponible pour vous </p>
+        <button class="add-to-cart" onclick="addToCart('Composant 2', 20000)">Ajouter au panier</button>
+      </div>
+    </div>
+    <!-- Ajoutez plus de produits ici -->
+    <!-- Exemple d'article supplémentaire -->
+    <div class="product">
+      <img src="images/ima (13).jpeg" alt="Composant 3">
+      <div class="product-info">
+        <h2 class="product-title">Bazin deux tons </h2>
+        <p class="product-price">12000 FCFA</p>
+        <p> Bazin disponible pour vous  </p>
+        <button class="add-to-cart" onclick="addToCart('Composant 3', 12000)">Ajouter au panier</button>
+      </div>
+    </div>
+    <div class="product">
+      <img src="images/ima (11).jpeg" alt="Composant 3">
+      <div class="product-info">
+        <h2 class="product-title">Bazin Getnez </h2>
+        <p class="product-price">48000 FCFA</p>
+        <p>Bazin disponible pour vous </p>
+        <button class="add-to-cart" onclick="addToCart('Composant 3', 48000)">Ajouter au panier</button>
+      </div>
+    </div>
+    <div class="product">
+      <img src="images/ima (16).jpeg" alt="Composant 3">
+      <div class="product-info">
+        <h2 class="product-title">Bazin riche</h2>
+        <p class="product-price">480000 FCFA</p>
+        <p>Bazin disponible pour vous </p>
+        <button class="add-to-cart" onclick="addToCart('Composant 3', 48000)">Ajouter au panier</button>
+      </div>
+    </div>
+    
+      
+  </main>
+  
+
+  <div id="order-form">
+    <input type="text" id="name" placeholder="Votre nom">
+    <input type="text" id="whatsapp" placeholder="Votre numéro WhatsApp">
+    <button onclick="checkout()">Valider la commande</button>
+  </div>
+
+  <script>
+    let cartItems = [];
+
+    // Fonction pour ajouter un produit au panier
+    function addToCart(productName, price) {
+      cartItems.push({ name: productName, price: price });
+      alert(`Produit ajouté au panier : ${productName} - Prix : $${price}`);
+    }
+
+    // Fonction pour afficher le contenu du panier et valider la commande
+    function checkout() {
+      const name = document.getElementById('name').value;
+      const whatsapp = document.getElementById('whatsapp').value;
+      if (!name || !whatsapp) {
+        alert("Veuillez saisir votre nom et votre numéro WhatsApp avant de valider la commande.");
+        return;
+      }
+
+      let cartContent = `Commande de ${name} (${whatsapp}) :\n`;
+      let total = 0;
+      for (const item of cartItems) {
+        cartContent += `${item.name} - Prix : $${item.price}\n`;
+        total += item.price;
+      }
+      cartContent += `\nTotal : $${total}`;
+
+      // Vous pouvez implémenter ici l'envoi du contenu du panier par e-mail ou WhatsApp
+      // Par exemple, vous pouvez utiliser des services d'e-mails ou de messagerie tierce partie
+
+      // Envoi de la commande par e-mail
+      window.location.href = `mailto:yolande.djimadja731@gmail.com?subject=Commande&body=${encodeURIComponent(cartContent)}`;
+      cartItems = [];
+    }
+  </script>
+
+      <p>   </p>
+<p> D’autre article disponible chez nous </p>
+<p>N'hésitez pas à nous contacter si vous avez besoins plus de renseignement</p>
+   </section>
+
+     <h2>   Image</h2>
+     <div class="image">
+       <div class="image-media">
+         <img src="images/ima (28).jpeg" alt="Image Projet 1" width="100">
+         <img src="images/ima (30).jpeg" alt="Image Projet 1" width="100">
+         <img src="images/ima (27).jpeg" alt="Image Projet 1" width="100">
+         <img src="images/ima (15).jpeg" alt="Image Projet 1" width="100">
+         <img src="images/ima (31).jpeg" alt="Image Projet 1" width="100">
+    
+       </div>
+        <div class="image">
+          <div class="image-media">
+            <img src="images/ima (22).jpeg" alt="Image Projet 1" width="100">
+            <img src="images/ima (23).jpeg" alt="Image Projet 1" width="100">
+            <img src="images/ima (24).jpeg" alt="Image Projet 1" width="100">
+            <img src="images/ima (25).jpeg" alt="Image Projet 1" width="100">
+            <img src="images/ima (34).jpeg" alt="Image Projet 1" width="100">
+          </div>
+          <div class="image">
+            <div class="image-media">
+                <img src="images/ima (6).jpeg" alt="Image Projet 1" width="100">
+                <img src="images/ima (7).jpeg" alt="Image Projet 1" width="100">
+                <img src="images/ima (8).jpeg" alt="Image Projet 1" width="100">
+                <img src="images/ima (9).jpeg" alt="Image Projet 1" width="100">
+                <img src="images/ima (12).jpeg" alt="Image Projet 1" width="100">
+            </div>
+     </div>
+    </section>
+  <footer>
+    <p>Contacts :</p>
+    <p>Email : yolande.djimadja731@gmail.com</p>
+    <p>Téléphone (WhatsApp) : (+229) 66-82-56-71</p>
+    <p>Adresse : Calavi, Djadjo Vont de l’église UNR </p>
+    <!-- Ajoutez d'autres informations de contact ici -->
+  </footer>
+  <p style="text-align: center;">© 2023 Ma Boutique De Bazin. Tous droits réservés.</p>
+
+  
+</body>
+</html>
